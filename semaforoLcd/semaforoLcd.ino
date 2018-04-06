@@ -5,7 +5,7 @@ const int ledR = 6;
 const int ledY = 9;
 const int ledG = 10;
 const int boton = 13;
-int timeSem = 10;
+int timeSem = 100;
 
 
 
@@ -21,7 +21,12 @@ pinMode(boton, INPUT_PULLUP);
 void loop() {
      
 cambioSem(ledR, ledY, ledG, timeSem);
-  
+
+
+if (digitalRead(boton) == LOW) {
+    timeSem = timeSem - 3;
+    Serial.println(timeSem);
+  }
 }
 
 
@@ -33,14 +38,18 @@ void cambioSem(int rojo, int amarillo, int verde, int tiempo) {
   luzSem[0]=luz0;
   luzSem[1]=luz1;
   luzSem[2]=luz2;
+  int timeL[] = {100, 5, 120};
+
 
 for (int a = 0; a<3; a++) {
- for (int i = tiempo; i>=0; i=i-1) {
+ for (int i = timeL[a]; i>=0; i=i-1) {
      lcd.clear();
      lcd.setCursor(0,1);
      lcd.print(i);
      lcd.setCursor(0,0);
      lcd.print(luzSem[a]);
+
+     
      switch (luzSem[a][0]) {
       case 'R':
      analogWrite(rojo, HIGH);
