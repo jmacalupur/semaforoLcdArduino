@@ -55,6 +55,10 @@ for (int a = 0; a<3; a++) {
      analogWrite(rojo, HIGH);
      analogWrite(amarillo, LOW);
      analogWrite(verde, LOW);
+    if (digitalRead(boton)==LOW) {
+      i = i - 10;
+    }
+     
       break;
       case 'A':
      analogWrite(rojo, LOW);
